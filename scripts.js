@@ -17,14 +17,16 @@ betosnrDiv.textContent = `SNR = ${snr_db.toFixed(2)} dB`;
 
 //adding style for result box
 betosnrDiv.style.backgroundColor = '#fff';
-betosnrDiv.style.border = '4px solid #011f4b';
+betosnrDiv.style.border = '4px solid #005b96';
 betosnrDiv.style.borderRadius = '10px';
-betosnrDiv.style.width = '100px';
+betosnrDiv.style.width = '200px';
 betosnrDiv.style.height = '40px';
 betosnrDiv.style.flex = '1';
-betosnrDiv.style.marginLeft = '10px';
+betosnrDiv.style.marginTop = '10px';
+betosnrDiv.style.marginBottom = '20px';
 betosnrDiv.style.display = 'flex';
 betosnrDiv.style.alignItems = 'center';
+betosnrDiv.style.justifyContent = 'center';
 });
 
 //event listener for the reset button
@@ -38,7 +40,8 @@ betosnrDiv.style.borderRadius = '';
 betosnrDiv.style.width = '';
 betosnrDiv.style.height = '';
 betosnrDiv.style.flex = '';
-betosnrDiv.style.marginLeft = '';
+betosnrDiv.style.marginTop = '';
+betosnrDiv.style.marginBottom = '';
 betosnrDiv.style.display = '';
 betosnrDiv.style.alignItems = '';
 });
@@ -60,14 +63,17 @@ snrtobeDiv.textContent = `BE = ${be.toFixed(2)} bps/Hz`;
 
 //adding style for result box
 snrtobeDiv.style.backgroundColor = '#fff';
-snrtobeDiv.style.border = '4px solid #011f4b';
+snrtobeDiv.style.border = '4px solid #005b96';
 snrtobeDiv.style.borderRadius = '10px';
-snrtobeDiv.style.width = '100px';
+snrtobeDiv.style.width = '200px'; // Adjusted width to match the 'betosnrDiv'
 snrtobeDiv.style.height = '40px';
 snrtobeDiv.style.flex = '1';
-snrtobeDiv.style.marginLeft = '10px';
+snrtobeDiv.style.marginTop = '10px';
+snrtobeDiv.style.marginBottom = '20px';
 snrtobeDiv.style.display = 'flex';
 snrtobeDiv.style.alignItems = 'center';
+snrtobeDiv.style.justifyContent = 'center'; // Added to center content horizontally
+
 });
 
 //event listener for the reset button
@@ -84,6 +90,7 @@ snrtobeDiv.style.flex = '';
 snrtobeDiv.style.marginLeft = '';
 snrtobeDiv.style.display = '';
 snrtobeDiv.style.alignItems = '';
+
 });
 
 //---------------------------------------------------------------------------------------------//

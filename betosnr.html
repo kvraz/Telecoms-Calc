@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BE to SNR Converter</title> 
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div>
+            <h2>Convert Bandwidth Efficiency to Signal to Noise Ratio</h2>
+            <form class="forms" id="be-form">
+                <div class="input-container">
+                  <input type="text" id="input1" name="input1" placeholder="Give a BE value in bps/Hz" required>
+                </div>                
+                <div class="button-container">
+                  <button type="submit">Calculate SNR</button>
+                  <div id="betosnr"></div>
+                  <button type="reset">Clear</button>
+                </div>
+            </form>
+            <h2>Convert Signal to Noise Ratio to Bandwidth Efficiency</h2>
+            <form class="forms" id="snr-form">
+                <div class="input-container">
+                  <input type="text" id="input2" name="input2" placeholder="Give a SNR value in dB" required>
+                </div>
+                <div class="button-container">
+                  <button type="submit">Calculate BE</button>
+                  <div id="snrtobe"></div>
+                  <button type="reset">Clear</button>
+                </div>
+              </form>
+              
+        </div>
+
+        <div class="buttonsContainer">
+            <a style="width:100px;" href="labs.html" class="redirectButton" id="b1">Home</a>
+        </div>
+
+        <script src="scripts.js"></script>
+    </body>
+    
+</html>
