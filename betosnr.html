@@ -7,32 +7,19 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <a style="width:100px;" href="labs.html" class="redirectButton">Back</a>
-        <div>
-            <h2>Convert Bandwidth Efficiency to Signal to Noise Ratio</h2>
-            <form class="forms" id="be-form">
-                <div class="input-container">
-                  <input type="text" id="input1" name="input1" placeholder="Give a BE value in bps/Hz" required>
-                </div>                
-                <div class="button-container">
-                  <button type="submit">Calculate SNR</button>
-                  <div id="betosnr"></div>
-                  <button type="reset">Clear</button>
-                </div>
-            </form>
-            <h2>Convert Signal to Noise Ratio to Bandwidth Efficiency</h2>
-            <form class="forms" id="snr-form">
-                <div class="input-container">
-                  <input type="text" id="input2" name="input2" placeholder="Give a SNR value in dB" required>
-                </div>
-                <div class="button-container">
-                  <button type="submit">Calculate BE</button>
-                  <div id="snrtobe"></div>
-                  <button type="reset">Clear</button>
-                </div>
-              </form>
-              
+        <a href="labs.html" class="redirectButton">Back</a>
+        <div id="formBeToSNR"> <!--Input field to insert BE and SNR values-->
+            <h1>Convert Bandwidth Efficiency to Signal to Noise Ratio</h1>
+            <label for="BE">Bandwidth Efficiency (BE) in bps/Hz:</label>
+            <input type="text" placeholder="Give a BE value in bps/Hz" id="BE" name="BE">
+            <input type="submit" value="Convert to SNR" onclick="convertToSNR()"><br>
+
+            <label for="SNR">Signal to Noise Ratio (SNR)  in dB:</label>
+            <input type="text" placeholder="Give a SNR value in dB" id="SNR" name="SNR">
+            <input type="submit" value="Convert to BE" onclick="convertToBE()"><br>  
+            <input type="submit" value="Clear" onclick="clearBeToSNR()">                           
         </div>
+        <div id="calculationsBeToSNR"></div> <!--This is were the mathematical process of conversions is shown-->
 
         <script src="scripts.js"></script>
     </body>

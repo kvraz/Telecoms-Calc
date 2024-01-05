@@ -1,96 +1,90 @@
+//Functions for BE to SNR Converter
 
-//JS Code for the BE to SNR Converter
+//Convert BE to SNR
+function convertToSNR(){
+    //Getting the BE value in bps/Hz and calculating the SNR in dB
+    var be = parseFloat(document.getElementById('BE').value);
+    var snr = Math.pow(2, be) - 1;
+    var snr_db = 10 * Math.log10(snr);
 
-//variables for the BE to SNR conversion
-const beform = document.getElementById('be-form');
-const betosnrDiv = document.getElementById('betosnr');
+    document.getElementById("SNR").value = snr_db.toFixed(2).toString();    //Displaying the result in the SNR Field
 
-//event listener for the form submission
-beform.addEventListener('submit', function(event) {
-event.preventDefault(); // Prevent default form submission
+    //Auxilliary code to show the mathematical process of conversion
+    if (!isNaN(be)){  
+        var header = "Process of Converting BE to SNR"
+        var beDemo = "BE = "+be.toFixed(2)+" bps/Hz";
+        var snrDemo = "BE = log2(SNR + 1) => SNR = 2^BE - 1 => SNR = 2^"+be.toFixed(2)+" - 1 => SNR = "+snr.toFixed(2);
+        var snrdbDemo = "SNR(db) = 10 * log10(SNR) => SNR(dB) = 10 * log10("+snr.toFixed(2)+") => SNR(dB) = "+snr_db.toFixed(2)+" dB";
+        changeBeToSNRDiv(header, beDemo, snrDemo, snrdbDemo);   
+    }
+    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+        let calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
+        calculationsBeToSNRDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please give a value for the Bandwidth Efficiency";
+        calculationsBeToSNRDiv.appendChild(errorMessage);
+    }
+}
 
-var be = parseFloat(document.getElementById('input1').value);
-var snr = Math.pow(2, be) - 1;
-var snr_db = 10 * Math.log10(snr);
+//Convert SNR to BE
+function convertToBE(){
+    //Getting the SNR value in dB and calculating the BE in bps/Hz
+    var snr_db = parseFloat(document.getElementById('SNR').value);
+    var snr = Math.pow(10, snr_db/10);
+    var be = Math.log2(snr+1);
 
-betosnrDiv.textContent = `SNR = ${snr_db.toFixed(2)} dB`;
+    document.getElementById("BE").value = be.toFixed(2).toString(); //Displaying the result in the BE field
 
-//adding style for result box
-betosnrDiv.style.backgroundColor = '#fff';
-betosnrDiv.style.border = '4px solid #005b96';
-betosnrDiv.style.borderRadius = '10px';
-betosnrDiv.style.width = '200px';
-betosnrDiv.style.height = '40px';
-betosnrDiv.style.flex = '1';
-betosnrDiv.style.marginTop = '10px';
-betosnrDiv.style.marginBottom = '20px';
-betosnrDiv.style.display = 'flex';
-betosnrDiv.style.alignItems = 'center';
-betosnrDiv.style.justifyContent = 'center';
-});
+    //Auxilliary code to show the mathematical process of conversion 
+    if (!isNaN(snr_db)){      
+        var header = "Process of Converting SNR to BE"
+        var snrdbDemo = "SNR(dB) = "+snr_db.toFixed(2)+" dB";
+        var snrDemo = "SNR(db) = 10 * log10(SNR) => SNR = 10^(SNR(dB)/10) => SNR = 10^("+snr_db.toFixed(2)+"/10) => SNR = "+snr.toFixed(2);
+        var beDemo = "BE = log2(SNR + 1) => BE = log2("+snr.toFixed(2)+"+1) => BE =  "+be.toFixed(2)+" bps/Hz";
+        changeBeToSNRDiv(header, snrdbDemo, snrDemo, beDemo);  
+    }
+    else{ //If the user hasn't given a value for the SNR he is notified and prompted to give another one                 
+       let calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
+       calculationsBeToSNRDiv.innerHTML = ""; 
+       let errorMessage = document.createElement("p");
+       errorMessage.style.color = "red";
+       errorMessage.textContent = "Please give a value for the Signal to Noise Ratio";
+       calculationsBeToSNRDiv.appendChild(errorMessage);
+    }  
+}
 
-//event listener for the reset button
-beform.addEventListener('reset', function(event) {
-betosnrDiv.textContent = '';
+//Show the mathematical process of a conversion
+function changeBeToSNRDiv(h, p1, p2, p3) {
+    var calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
 
-//removing result box
-betosnrDiv.style.backgroundColor = '';
-betosnrDiv.style.border = '';
-betosnrDiv.style.borderRadius = '';
-betosnrDiv.style.width = '';
-betosnrDiv.style.height = '';
-betosnrDiv.style.flex = '';
-betosnrDiv.style.marginTop = '';
-betosnrDiv.style.marginBottom = '';
-betosnrDiv.style.display = '';
-betosnrDiv.style.alignItems = '';
-});
+    // Clear existing content
+    calculationsBeToSNRDiv.innerHTML = "";
 
+    //The header will be the type of conversion taking place and the paragraphs the individual operations
+    var header = document.createElement("h2");
+    header.textContent = h;
+    var par1 = document.createElement("p");
+    par1.textContent = p1;
+    var par2 = document.createElement("p");
+    par2.textContent = p2;
+    var par3 = document.createElement("p");
+    par3.textContent = p3;
 
-//variables for the SNR to BE conversion
-const snrform = document.getElementById('snr-form');
-const snrtobeDiv = document.getElementById('snrtobe');
+    calculationsBeToSNRDiv.appendChild(header);
+    calculationsBeToSNRDiv.appendChild(par1);
+    calculationsBeToSNRDiv.appendChild(par2);
+    calculationsBeToSNRDiv.appendChild(par3);
+}
 
-//event listener for the form submission
-snrform.addEventListener('submit', function(event) {
-event.preventDefault(); // Prevent default form submission
+//Clear inputs
+function clearBeToSNR(){
+    //Clear the two input fields
+    document.getElementById('BE').value = "";
+    document.getElementById('SNR').value = "";
 
-var snr_db = parseFloat(document.getElementById('input2').value);
-var snr = Math.pow(10, snr_db/10);
-var be = Math.log2(snr+1);
+    //Clear the calculations div 
+    document.getElementById("calculationsBeToSNR").innerHTML = "";    
+}
 
-snrtobeDiv.textContent = `BE = ${be.toFixed(2)} bps/Hz`;
-
-//adding style for result box
-snrtobeDiv.style.backgroundColor = '#fff';
-snrtobeDiv.style.border = '4px solid #005b96';
-snrtobeDiv.style.borderRadius = '10px';
-snrtobeDiv.style.width = '200px'; // Adjusted width to match the 'betosnrDiv'
-snrtobeDiv.style.height = '40px';
-snrtobeDiv.style.flex = '1';
-snrtobeDiv.style.marginTop = '10px';
-snrtobeDiv.style.marginBottom = '20px';
-snrtobeDiv.style.display = 'flex';
-snrtobeDiv.style.alignItems = 'center';
-snrtobeDiv.style.justifyContent = 'center'; // Added to center content horizontally
-
-});
-
-//event listener for the reset button
-snrform.addEventListener('reset', function(event) {
-snrtobeDiv.textContent = '';
-
-//removing result box
-snrtobeDiv.style.backgroundColor = '';
-snrtobeDiv.style.border = '';
-snrtobeDiv.style.borderRadius = '';
-snrtobeDiv.style.width = '';
-snrtobeDiv.style.height = '';
-snrtobeDiv.style.flex = '';
-snrtobeDiv.style.marginLeft = '';
-snrtobeDiv.style.display = '';
-snrtobeDiv.style.alignItems = '';
-
-});
-
-//---------------------------------------------------------------------------------------------//
+/**********************************************************************************/

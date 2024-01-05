@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Propagation Speed Calculator</title> 
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <a style="width:100px; margin-bottom: 20px;" href="labs.html" class="redirectButton">Back</a>
+
+        <h1>Propagation Speed Calculator</h1>
+
+        <form class="forms" id="speed-form">
+            <div class="input-container">
+              <input type="text" placeholder="Give the receiver power in initial position" id="Pr" name="Pr" required>
+              <input type="text" placeholder="Give the receiver power in final position" id="Prl" name="Prl" required>
+              <input type="text" placeholder="Initial distance from transmitter" id="d" name="d" required>
+              <input type="text" placeholder="Signal loss" id="n" name="n" required>
+              <input type="text" placeholder="Time" id="t" name="t" required>
+            </div>              
+            <div class="button-container-hor">
+              <button type="submit">Calculate PdBw</button>
+              <button type="reset">Clear</button>
+            </div>
+        </form>
+        <div id="speedcalc"></div>
+
+        <script src="scripts.js"></script>
+    </body>
+</html>
