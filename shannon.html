@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Shannon's Formula</title> 
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <a href="labs.html" class="redirectButton">Back</a>
+        <div id="formSEToSNR"> <!--Input field to insert SE and SNR values-->
+            <h1>Shannon's Formula</h1>
+            <label for="SE">Spectral Efficiency (SE) in bps/Hz:</label>
+            <input type="text" placeholder="Give a SE value in bps/Hz" id="SE" name="SE">
+            <input type="submit" value="Calculate SNR" onclick="convertToSNR()"><br>
+
+            <label for="SNR">Signal to Noise Ratio (SNR)  in dB:</label>
+            <input type="text" placeholder="Give a SNR value in dB" id="SNR" name="SNR">
+            <input type="submit" value="Calculate SE" onclick="convertToSE()"><br>  
+            <input type="submit" value="Clear" onclick="clearSEToSNR()">                           
+        </div>
+        <div id="calculationsSEToSNR"></div> <!--This is were the mathematical process of conversions is shown-->
+
+        <script src="scripts.js"></script>
+    </body>
+    
+</html>

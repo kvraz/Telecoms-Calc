@@ -1,69 +1,69 @@
-//Functions for BE to SNR Converter
+//Functions for SE to SNR Converter
 
-//Convert BE to SNR
+//Convert SE to SNR
 function convertToSNR(){
-    //Getting the BE value in bps/Hz and calculating the SNR in dB
-    var be = parseFloat(document.getElementById('BE').value);
-    var snr = Math.pow(2, be) - 1;
+    //Getting the SE value in bps/Hz and calculating the SNR in dB
+    var SE = parseFloat(document.getElementById('SE').value);
+    var snr = Math.pow(2, SE) - 1;
     var snr_db = 10 * Math.log10(snr);    
     
-    if (!isNaN(be)){  //Checking if user input was correct
+    if (!isNaN(SE)){  //Checking if user input was correct
         //Displaying the result in the SNR Field
-        document.getElementById("SNR").value = snr_db.toFixed(3).toString();   
+        document.getElementById("SNR").value = snr_db.toFixed(2).toString();   
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Process of Converting BE to SNR"
-        var beDemo = "BE = "+be.toFixed(3)+" bps/Hz";
-        var snrDemo = "BE = log2(SNR + 1) => SNR = 2^BE - 1 => SNR = 2^"+be.toFixed(3)+" - 1 => SNR = "+snr.toFixed(3);
-        var snrdbDemo = "SNRdb = 10 * log10SNR => SNRdB = 10 * log10("+snr.toFixed(3)+") => SNRdB = "+snr_db.toFixed(3)+" dB";
-        changeBeToSNRDiv(header, beDemo, snrDemo, snrdbDemo);   
+        var header = "Process of Calculating SNR from SE"
+        var SEDemo = "SE = "+SE.toFixed(2)+" bps/Hz";
+        var snrDemo = "SE = log2(SNR + 1) => SNR = 2^SE - 1 => SNR = 2^"+SE.toFixed(2)+" - 1 => SNR = "+snr.toFixed(2);
+        var snrdbDemo = "SNRdb = 10 * log10SNR => SNRdB = 10 * log10("+snr.toFixed(2)+") => SNRdB = "+snr_db.toFixed(2)+" dB";
+        changeSEToSNRDiv(header, SEDemo, snrDemo, snrdbDemo);   
     }
-    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
-        let calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
-        calculationsBeToSNRDiv.innerHTML = ""; 
+    else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
+        let calculationsSEToSNRDiv = document.getElementById("calculationsSEToSNR");
+        calculationsSEToSNRDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
         errorMessage.style.color = "red";
         errorMessage.textContent = "Please give a value for the Bandwidth Efficiency!";
-        calculationsBeToSNRDiv.appendChild(errorMessage);
+        calculationsSEToSNRDiv.appendChild(errorMessage);
     }
 }
 
-//Convert SNR to BE
-function convertToBE(){
-    //Getting the SNR value in dB and calculating the BE in bps/Hz
+//Convert SNR to SE
+function convertToSE(){
+    //Getting the SNR value in dB and calculating the SE in bps/Hz
     var snr_db = parseFloat(document.getElementById('SNR').value);
     var snr = Math.pow(10, snr_db/10);
-    var be = Math.log2(snr+1);  
+    var SE = Math.log2(snr+1);  
      
     if (!isNaN(snr_db)){    //Checking if user input is correct 
-        //Displaying the result in the BE field
-        document.getElementById("BE").value = be.toFixed(3).toString(); 
+        //Displaying the result in the SE field
+        document.getElementById("SE").value = SE.toFixed(2).toString(); 
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Process of Converting SNR to BE"
-        var snrdbDemo = "SNRdB = "+snr_db.toFixed(3)+" dB";
-        var snrDemo = "SNRdb = 10 * log10(SNR) => SNR = 10^(SNRdB/10) => SNR = 10^("+snr_db.toFixed(3)+"/10) => SNR = "+snr.toFixed(3);
-        var beDemo = "BE = log2(SNR + 1) => BE = log2("+snr.toFixed(3)+"+1) => BE =  "+be.toFixed(3)+" bps/Hz";
-        changeBeToSNRDiv(header, snrdbDemo, snrDemo, beDemo);  
+        var header = "Process of Calculating SE from SNR"
+        var snrdbDemo = "SNRdB = "+snr_db.toFixed(2)+" dB";
+        var snrDemo = "SNRdb = 10 * log10(SNR) => SNR = 10^(SNRdB/10) => SNR = 10^("+snr_db.toFixed(2)+"/10) => SNR = "+snr.toFixed(2);
+        var SEDemo = "SE = log2(SNR + 1) => SE = log2("+snr.toFixed(2)+"+1) => SE =  "+SE.toFixed(2)+" bps/Hz";
+        changeSEToSNRDiv(header, snrdbDemo, snrDemo, SEDemo);  
     }
     else{ //If the user hasn't given a value for the SNR he is notified and prompted to give another one                 
-       let calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
-       calculationsBeToSNRDiv.innerHTML = ""; 
+       let calculationsSEToSNRDiv = document.getElementById("calculationsSEToSNR");
+       calculationsSEToSNRDiv.innerHTML = ""; 
        let errorMessage = document.createElement("p");
        errorMessage.style.color = "red";
        errorMessage.textContent = "Please give a value for the Signal to Noise Ratio!";
-       calculationsBeToSNRDiv.appendChild(errorMessage);
+       calculationsSEToSNRDiv.appendChild(errorMessage);
     }  
 }
 
 //Show the mathematical process of a conversion
-function changeBeToSNRDiv(h, p1, p2, p3) {
-    var calculationsBeToSNRDiv = document.getElementById("calculationsBeToSNR");
+function changeSEToSNRDiv(h, p1, p2, p3) {
+    var calculationsSEToSNRDiv = document.getElementById("calculationsSEToSNR");
 
     // Clear existing content
-    calculationsBeToSNRDiv.innerHTML = "";
+    calculationsSEToSNRDiv.innerHTML = "";
 
-    //The header will be the type of conversion taking place and the paragraphs the individual operations
+    //The header will SE the type of conversion taking place and the paragraphs the individual operations
     var header = document.createElement("h2");
     header.textContent = h;
     var par1 = document.createElement("p");
@@ -73,20 +73,24 @@ function changeBeToSNRDiv(h, p1, p2, p3) {
     var par3 = document.createElement("p");
     par3.textContent = p3;
 
-    calculationsBeToSNRDiv.appendChild(header);
-    calculationsBeToSNRDiv.appendChild(par1);
-    calculationsBeToSNRDiv.appendChild(par2);
-    calculationsBeToSNRDiv.appendChild(par3);
+    var explantion = document.createElement("h4");
+    explantion.textContent = "Shannon's formula: C = B * log2(1 + SNR), C in bps, B in Hz and SE = C/B = log2(1 + SNR) in bps/Hz";
+
+    calculationsSEToSNRDiv.appendChild(header);
+    calculationsSEToSNRDiv.appendChild(explantion);
+    calculationsSEToSNRDiv.appendChild(par1);
+    calculationsSEToSNRDiv.appendChild(par2);
+    calculationsSEToSNRDiv.appendChild(par3);
 }
 
 //Clear inputs
-function clearBeToSNR(){
+function clearSEToSNR(){
     //Clear the two input fields
-    document.getElementById('BE').value = "";
+    document.getElementById('SE').value = "";
     document.getElementById('SNR').value = "";
 
     //Clear the calculations div 
-    document.getElementById("calculationsBeToSNR").innerHTML = "";    
+    document.getElementById("calculationsSEToSNR").innerHTML = "";    
 }
 
 /**********************************************************************************/
@@ -102,20 +106,20 @@ function convertPW(){
   
     if (!isNaN(w) && w>=0){ //Checking if the user input is correct
         //Displaying the other unit results on their fields
-        document.getElementById("PmW").value = mw.toString();
-        document.getElementById("PdBW").value = dbw.toString();
-        document.getElementById("PdBm").value = dbm.toString();
+        document.getElementById("PmW").value = mw.toFixed(2).toString();
+        document.getElementById("PdBW").value = dbw.toFixed(2).toString();
+        document.getElementById("PdBm").value = dbm.toFixed(2).toString();
 
         //Auxilliary code to show the mathematical process of conversion
         var header = "Converting Power in Watts"
-        var wDemo = "PW = "+w+ " watts";
-        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";
-        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w+") => PdBW = "+dbw+" dBW"; 
-        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w+") + 30 => PdBm = "+dbm+" dBm"; 
+        var wDemo = "PW = "+w.toFixed(2)+ " watts";
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w.toFixed(2)+" =>PmW = "+mw.toFixed(2)+" milliwatts";
+        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w.toFixed(2)+") => PdBW = "+dbw.toFixed(2)+" dBW"; 
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w.toFixed(2)+") + 30 => PdBm = "+dbm.toFixed(2)+" dBm"; 
 
         changePowerMeasDiv(header, wDemo, mwDemo, dbwDemo, dbmDemo);
     }
-    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+    else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
         let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
         calculationsPowerConvDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
@@ -135,20 +139,20 @@ function convertPmW(){
   
     if (!isNaN(mw) && mw>=0){ //Checking if the user input is correct
         //Displaying the other unit results on their fields
-        document.getElementById("PW").value = w.toString();
-        document.getElementById("PdBW").value = dbw.toString();
-        document.getElementById("PdBm").value = dbm.toString();
+        document.getElementById("PW").value = w.toFixed(2).toString();
+        document.getElementById("PdBW").value = dbw.toFixed(2).toString();
+        document.getElementById("PdBm").value = dbm.toFixed(2).toString();
 
         //Auxilliary code to show the mathematical process of conversion
         var header = "Converting Power in Milliwatts"
-        var mwDemo = "PmW = "+mw+ " milliwatts";
-        var wDemo = "PW = PmW / 1000 => PW = "+mw+" / 1000 =>PW = "+w+" watts";
-        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w+") => PdBW = "+dbw+" dBW"; 
-        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w+") + 30 => PdBm = "+dbm+" dBm"; 
+        var mwDemo = "PmW = "+mw.toFixed(2)+ " milliwatts";
+        var wDemo = "PW = PmW / 1000 => PW = "+mw.toFixed(2)+" / 1000 =>PW = "+w.toFixed(2)+" watts";
+        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w.toFixed(2)+") => PdBW = "+dbw.toFixed(2)+" dBW"; 
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w.toFixed(2)+") + 30 => PdBm = "+dbm.toFixed(2)+" dBm"; 
 
         changePowerMeasDiv(header, mwDemo, wDemo, dbwDemo, dbmDemo);
     }
-    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+    else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
         let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
         calculationsPowerConvDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
@@ -173,7 +177,7 @@ function convertPdBW(){
         document.getElementById("PdBm").value = dbm.toString();
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Converting Power in Decibels Relative to One Watt"
+        var header = "Converting Power in DeciSEls Relative to One Watt"
         var dbwDemo =  "PdBW = "+dbw+ " dBW"; 
         var wDemo = "PdBW = 10 * log10(PW) => PW = 10 ^ (PdBW / 10) => PW = 10 ^ ("+dbw+" / 10) => PW = "+w+" watts";
         var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";              
@@ -181,7 +185,7 @@ function convertPdBW(){
 
         changePowerMeasDiv(header, dbwDemo, wDemo, mwDemo, dbmDemo);
     }
-    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+    else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
         let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
         calculationsPowerConvDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
@@ -201,20 +205,20 @@ function convertPdBm(){
   
     if (!isNaN(dbm)){ //Checking if the user input is correct
         //Displaying the other unit results on their fields
-        document.getElementById("PW").value = w.toString();
-        document.getElementById("PmW").value = mw.toString();
-        document.getElementById("PdBW").value = dbw.toString();
+        document.getElementById("PW").value = w.toFixed(2).toString();
+        document.getElementById("PmW").value = mw.toFixed(2).toString();
+        document.getElementById("PdBW").value = dbw.toFixed(2).toString();
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Converting Power in Decibels Relative to One Milliwatt"
-        var dbmDemo = "PdBm = "+dbm+ " dBm"
-        var wDemo = "PdBm = 10 * log10(PW) + 30 => PW = 10 ^ [(PdBm - 30) / 10] => PW = 10 ^ [("+dbm+" - 30) / 10] => PW = "+w+" watts";       
-        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";              
-        var dbwDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBW = "+dbm+" - 30 => PdBW = "+dbw+" dBW"; 
+        var header = "Converting Power in DeciSEls Relative to One Milliwatt"
+        var dbmDemo = "PdBm = "+dbm.toFixed(2)+ " dBm"
+        var wDemo = "PdBm = 10 * log10(PW) + 30 => PW = 10 ^ [(PdBm - 30) / 10] => PW = 10 ^ [("+dbm.toFixed(2)+" - 30) / 10] => PW = "+w.toFixed(2)+" watts";       
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w.toFixed(2)+" =>PmW = "+mw.toFixed(2)+" milliwatts";              
+        var dbwDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBW = "+dbm.toFixed(2)+" - 30 => PdBW = "+dbw.toFixed(2)+" dBW"; 
 
         changePowerMeasDiv(header, dbmDemo, wDemo, mwDemo, dbwDemo);
     }
-    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+    else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
         let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
         calculationsPowerConvDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
@@ -231,7 +235,7 @@ function changePowerMeasDiv(h, p1, p2, p3, p4){
     // Clear existing content
     calculationsPowerConvDiv.innerHTML = "";
 
-    //The header will be the type of conversion taking place and the paragraphs the individual operations
+    //The header will SE the type of conversion taking place and the paragraphs the individual operations
     var header = document.createElement("h2");
     header.textContent = h;
     var par1 = document.createElement("p");
@@ -263,3 +267,50 @@ function clearPowerConv(){
 }
 
 /**********************************************************************************/
+//Functions to Calculate SE Limit
+function calculateSeLim(){
+    //Getting value of EbN0 in dB
+    var EbN0_db = parseFloat(document.getElementById('EbN0').value);
+
+    if (!isNaN(EbN0_db)){ //checking if the user input is correct
+        var EbN0 = Math.pow(10, EbN0_db/10);
+        var SE = 0.1;
+
+        while (true){
+            if(SE <= Math.log2(1 + (EbN0 * SE)))
+                SE+=0.1;
+            else{
+                SE-=0.1;                
+                break;
+            }
+        }
+
+        //Auxialliary code to show the process of calculation
+        let calculationsSeLimDiv = document.getElementById("calculationsSeLim");
+        calculationsSeLimDiv.innerHTML = ""; 
+        var par1 = document.createElement("p");
+        par1.textContent = "EbN0dB = 10 * log10(EbN0) => EbN0 = 10 ^ (EbN0dB / 10) => EbN0 = 10 ^ ("+EbN0_db+" / 10) => EbN0 = "+EbN0.toFixed(2);
+        var par2 = document.createElement("p");
+        par2.textContent = "SE <= log2(1 + EbN0 * SE) => SE <= log2(1 + "+EbN0.toFixed(2)+" * SE)";
+        var par3 = document.createElement("p");
+        par3.textContent = "The largest SE value that meets this condition = "+SE.toFixed(2)+" bps/Hz";
+
+        calculationsSeLimDiv.appendChild(par1);
+        calculationsSeLimDiv.appendChild(par2);
+        calculationsSeLimDiv.appendChild(par3);
+
+    }
+    else{
+        //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one          
+        calculationsSeLimDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please give a value for the Eb/N0!";
+        calculationsSeLimDiv.appendChild(errorMessage);
+    }
+}
+
+function clearSeLim(){
+    document.getElementById('EbN0').value = "";
+    document.getElementById("calculationsSeLim").innerHTML = "";
+}
