@@ -91,6 +91,8 @@ function clearBeToSNR(){
 
 /**********************************************************************************/
 //Functions for Power Measurment Converter
+
+//Convert watts to other units
 function convertPW(){
     //Getting the power in Watts and calculating the other units
     var w = parseFloat(document.getElementById("PW").value);
@@ -100,16 +102,16 @@ function convertPW(){
   
     if (!isNaN(w) && w>=0){ //Checking if the user input is correct
         //Displaying the other unit results on their fields
-        document.getElementById("PmW").value = mw;
-        document.getElementById("PdBW").value = dbw;
-        document.getElementById("PdBm").value = dbm;
+        document.getElementById("PmW").value = mw.toString();
+        document.getElementById("PdBW").value = dbw.toString();
+        document.getElementById("PdBm").value = dbm.toString();
 
         //Auxilliary code to show the mathematical process of conversion
         var header = "Converting Power in Watts"
         var wDemo = "PW = "+w+ " watts";
-        var mwDemo = "PmW = 1000 * W => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";
-        var dbwDemo = "PdBW = 10 * log10(W) => PdBW = 10 * log10("+w+") => PdBW = "+dbw+" dBW"; 
-        var dbmDemo =  "PdBm = 10 * log10(W) + 30 => PdBm = 10 * log10("+w+") + 30 => PdBm = "+dbm+" dBm"; 
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";
+        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w+") => PdBW = "+dbw+" dBW"; 
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w+") + 30 => PdBm = "+dbm+" dBm"; 
 
         changePowerMeasDiv(header, wDemo, mwDemo, dbwDemo, dbmDemo);
     }
@@ -123,25 +125,106 @@ function convertPW(){
     }
 }
 
+//Convert milliwatts to other units
 function convertPmW(){
+    //Getting the power in Milliwatts and calculating the other units
+    var mw = parseFloat(document.getElementById("PmW").value);
+    var w = mw / 1000;
+    var dbw = 10 * Math.log10(w);
+    var dbm = 10 * Math.log10(w) + 30;
+  
+    if (!isNaN(mw) && mw>=0){ //Checking if the user input is correct
+        //Displaying the other unit results on their fields
+        document.getElementById("PW").value = w.toString();
+        document.getElementById("PdBW").value = dbw.toString();
+        document.getElementById("PdBm").value = dbm.toString();
 
+        //Auxilliary code to show the mathematical process of conversion
+        var header = "Converting Power in Milliwatts"
+        var mwDemo = "PmW = "+mw+ " milliwatts";
+        var wDemo = "PW = PmW / 1000 => PW = "+mw+" / 1000 =>PW = "+w+" watts";
+        var dbwDemo = "PdBW = 10 * log10(PW) => PdBW = 10 * log10("+w+") => PdBW = "+dbw+" dBW"; 
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = 10 * log10("+w+") + 30 => PdBm = "+dbm+" dBm"; 
+
+        changePowerMeasDiv(header, mwDemo, wDemo, dbwDemo, dbmDemo);
+    }
+    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+        let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
+        calculationsPowerConvDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please give a correct value for PmW!";
+        calculationsPowerConvDiv.appendChild(errorMessage);
+    }
 }
 
+//Convert dBW to other units
 function convertPdBW(){
+    //Getting the power in dbW and calculating the other units    
+    var dbw = parseFloat(document.getElementById("PdBW").value);
+    var w = Math.pow(10, dbw/10);
+    var mw = w * 1000;
+    var dbm = dbw + 30;
+  
+    if (!isNaN(dbw)){ //Checking if the user input is correct
+        //Displaying the other unit results on their fields
+        document.getElementById("PW").value = w.toString();
+        document.getElementById("PmW").value = mw.toString();
+        document.getElementById("PdBm").value = dbm.toString();
 
+        //Auxilliary code to show the mathematical process of conversion
+        var header = "Converting Power in Decibels Relative to One Watt"
+        var dbwDemo =  "PdBW = "+dbw+ " dBW"; 
+        var wDemo = "PdBW = 10 * log10(PW) => PW = 10 ^ (PdBW / 10) => PW = 10 ^ ("+dbw+" / 10) => PW = "+w+" watts";
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";              
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBm = "+dbw+" + 30 => PdBm = "+dbm+" dBm"; 
+
+        changePowerMeasDiv(header, dbwDemo, wDemo, mwDemo, dbmDemo);
+    }
+    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+        let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
+        calculationsPowerConvDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please give a correct value for PdBW!";
+        calculationsPowerConvDiv.appendChild(errorMessage);
+    }
 }
 
-function clearPowerConv(){
-    //Clear the four input fields
-    document.getElementById("PW").value = "";
-    document.getElementById("PmW").value = "";
-    document.getElementById("PdBW").value = "";
-    document.getElementById("PdBm").value = "";
+//Convert dBm to other units
+function convertPdBm(){
+    //Getting the power in dbm and calculating the other units    
+    var dbm = parseFloat(document.getElementById("PdBm").value);
+    var w = Math.pow(10, (dbm-30)/10);
+    var mw = w * 1000;
+    var dbw = dbm - 30;
+  
+    if (!isNaN(dbm)){ //Checking if the user input is correct
+        //Displaying the other unit results on their fields
+        document.getElementById("PW").value = w.toString();
+        document.getElementById("PmW").value = mw.toString();
+        document.getElementById("PdBW").value = dbw.toString();
 
-    //Clear the calculations div 
-    document.getElementById("calculationsPowerConv").innerHTML = "";  
+        //Auxilliary code to show the mathematical process of conversion
+        var header = "Converting Power in Decibels Relative to One Milliwatt"
+        var dbmDemo = "PdBm = "+dbm+ " dBm"
+        var wDemo = "PdBm = 10 * log10(PW) + 30 => PW = 10 ^ [(PdBm - 30) / 10] => PW = 10 ^ [("+dbm+" - 30) / 10] => PW = "+w+" watts";       
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";              
+        var dbwDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBW = "+dbm+" - 30 => PdBW = "+dbw+" dBW"; 
+
+        changePowerMeasDiv(header, dbmDemo, wDemo, mwDemo, dbwDemo);
+    }
+    else{   //If the user hasn't given a value for the BE he is notified and prompted to give another one    
+        let calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
+        calculationsPowerConvDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please give a correct value for PdBW!";
+        calculationsPowerConvDiv.appendChild(errorMessage);
+    }
 }
 
+//Show the mathematical process of a conversion
 function changePowerMeasDiv(h, p1, p2, p3, p4){
     var calculationsPowerConvDiv = document.getElementById("calculationsPowerConv");
 
@@ -167,3 +250,16 @@ function changePowerMeasDiv(h, p1, p2, p3, p4){
     calculationsPowerConvDiv.appendChild(par4);
 }
 
+//Clear inputs
+function clearPowerConv(){
+    //Clear the four input fields
+    document.getElementById("PW").value = "";
+    document.getElementById("PmW").value = "";
+    document.getElementById("PdBW").value = "";
+    document.getElementById("PdBm").value = "";
+
+    //Clear the calculations div 
+    document.getElementById("calculationsPowerConv").innerHTML = "";  
+}
+
+/**********************************************************************************/
