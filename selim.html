@@ -9,7 +9,7 @@
     </head>
     <body>
         <a href="labs.html" class="redirectButton">Back</a>
-        <div id="formSeLim"> <!--Input field to insert Eb/N0 value-->
+        <div id="formSeLim" class = "forms"> <!--Input field to insert Eb/N0 value-->
             <h1>Spectral Efficiency Limit</h1>
             <h4>Calculte the upper limit of Spectral Efficiency (SE) with Eb/N0 (SNR per bit)</h4>
             <label for="EbN0">Eb/N0 in dB:</label>
@@ -17,7 +17,7 @@
             <input type="submit" value="Calculate lim" onclick="calculateSeLim()"><br>
             <input type="submit" value="Clear" onclick="clearSeLim()">      
         </div>
-        <div id="calculationsSeLim"></div> <!--This is were the mathematical process of conversions is shown-->
+        <div id="calculationsSeLim" class="calcs"></div> <!--This is were the mathematical process of conversions is shown-->
 
         <script src="scripts.js"></script>
     </body>

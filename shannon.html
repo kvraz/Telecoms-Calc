@@ -9,7 +9,7 @@
     </head>
     <body>
         <a href="labs.html" class="redirectButton">Back</a>
-        <div id="formSEToSNR"> <!--Input field to insert SE and SNR values-->
+        <div id="formSEToSNR" class = "forms"> <!--Input field to insert SE and SNR values-->
             <h1>Shannon's Formula</h1>
             <label for="SE">Spectral Efficiency (SE) in bps/Hz:</label>
             <input type="text" placeholder="Give a SE value in bps/Hz" id="SE" name="SE">
@@ -20,7 +20,7 @@
             <input type="submit" value="Calculate SE" onclick="convertToSE()"><br>  
             <input type="submit" value="Clear" onclick="clearSEToSNR()">                           
         </div>
-        <div id="calculationsSEToSNR"></div> <!--This is were the mathematical process of conversions is shown-->
+        <div id="calculationsSEToSNR" class="calcs"></div> <!--This is were the mathematical process of conversions is shown-->
 
         <script src="scripts.js"></script>
     </body>

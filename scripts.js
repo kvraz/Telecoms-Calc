@@ -289,7 +289,7 @@ function calculateSeLim(){
         let calculationsSeLimDiv = document.getElementById("calculationsSeLim");
         calculationsSeLimDiv.innerHTML = ""; 
         var par1 = document.createElement("p");
-        par1.textContent = "EbN0dB = 10 * log10(EbN0) => EbN0 = 10 ^ (EbN0dB / 10) => EbN0 = 10 ^ ("+EbN0_db+" / 10) => EbN0 = "+EbN0.toFixed(2);
+        par1.textContent = "EbN0dB = 10 * log10(EbN0) => EbN0 = 10 ^ (EbN0dB / 10) => EbN0 = 10 ^ ("+EbN0_db.toFixed(2)+" / 10) => EbN0 = "+EbN0.toFixed(2);
         var par2 = document.createElement("p");
         par2.textContent = "SE <= log2(1 + EbN0 * SE) => SE <= log2(1 + "+EbN0.toFixed(2)+" * SE)";
         var par3 = document.createElement("p");
@@ -326,7 +326,25 @@ function calculateSignalSpeed(){
     var t = parseFloat(document.getElementById('t').value);
 
     if(!isNaN(iP) && !isNaN(fP) && !isNaN(d) && !isNaN(sl) && !isNaN(t) && (sl>=3) && (sl<=5) && (d>=0) && (t>=0)) {
+        var d1 = Math.pow(10,( Math.log10(d) + ( Math.log10(iP/fP) / sl )  ) ) - d ;
+        var speed = d1 /t;
+       
+        let calculationsSignalSpeedDiv = document.getElementById("calculationsSignalSpeed");
+        calculationsSignalSpeedDiv.innerHTML = ""; 
 
+        var header = document.createElement("h2");
+        header.textContent = "Reviewing Calculation";
+        var parameters = document.createElement("p");
+        parameters.textContent = "ip = "+iP+", fp = "+fP+", d = "+d+" m, sl = "+sl+", t = "+t+" s";
+        var dDemo = document.createElement("p");
+        dDemo.textContent = "d' = 10 ^ [log10(d) + log10(ip/fp) / sl] - d => d' = 10 ^ [log10("+d.toFixed(2)+") + log10("+iP.toFixed(2)+"/"+fP.toFixed(2)+") / "+sl.toFixed(2)+"] - "+d.toFixed(2)+" => d' = "+d1.toFixed(2)+" m";
+        var sDemo = document.createElement("p");
+        sDemo.textContent = "u = d' / t => u = "+d1.toFixed(2)+" / "+t+" => u = "+speed.toFixed(2)+" m/s"
+        
+        calculationsSignalSpeedDiv.append(header);
+        calculationsSignalSpeedDiv.append(parameters);
+        calculationsSignalSpeedDiv.append(dDemo);
+        calculationsSignalSpeedDiv.append(sDemo);      
     }
     else{
         //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one  
@@ -339,8 +357,6 @@ function calculateSignalSpeed(){
     }
 
 }
-
-
 
 function clearSignalSpeed(){
     document.getElementById('initP').value = "";
