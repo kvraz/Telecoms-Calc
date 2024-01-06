@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Signal Speed Calculator</title> 
+        <link rel="icon" href="favicon.ico" type="image/x-icon">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <a href="labs.html" class="redirectButton">Back</a>
+        <div id="formSignalSpeed"> <!--Input field to insert speed parameters-->
+            <h1>Signal Speed Calculator</h1>
+            <label for="initP">Initial Power:</label>
+            <input type="text" placeholder="Receiver Power in Initial Position" id="initP" name="initP" required><br>
+
+            <label for="finalP">Final Power:</label>
+            <input type="text" placeholder="Receiver Power in Final Position" id="finalP" name="finalP" required><br>
+
+            <label for="d">Distance:</label>
+            <input type="text" placeholder="Initial Distance from Transmitter" id="d" name="d" required><br>
+
+            <label for="sl">Signal Loss:</label>
+            <input type="text" placeholder="Signal Loss [3,5]" id="sl" name="sl" required><br>
+
+            <label for="t">Time:</label>
+            <input type="text" placeholder="Time" id="t" name="t" required><br>         
+
+            <input type="submit" value="Calculate Speed" onclick="calculateSignalSpeed()">
+            
+            <input type="submit" value="Clear" onclick="clearSignalSpeed()">                           
+        </div>
+        <div id="calculationsSignalSpeed"></div> <!--This is were the mathematical process of conversions is shown-->
+
+        <script src="scripts.js"></script>
+    </body>
+    
+</html>

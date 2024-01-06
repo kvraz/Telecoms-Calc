@@ -301,7 +301,8 @@ function calculateSeLim(){
 
     }
     else{
-        //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one          
+        //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one 
+        let calculationsSeLimDiv = document.getElementById("calculationsSeLim");         
         calculationsSeLimDiv.innerHTML = ""; 
         let errorMessage = document.createElement("p");
         errorMessage.style.color = "red";
@@ -313,4 +314,39 @@ function calculateSeLim(){
 function clearSeLim(){
     document.getElementById('EbN0').value = "";
     document.getElementById("calculationsSeLim").innerHTML = "";
+}
+
+/**********************************************************************************/
+//Functions to calculate Signal Speed
+function calculateSignalSpeed(){
+    var iP = parseFloat(document.getElementById('initP').value);
+    var fP = parseFloat(document.getElementById('finalP').value);
+    var d = parseFloat(document.getElementById('d').value);
+    var sl = parseFloat(document.getElementById('sl').value);
+    var t = parseFloat(document.getElementById('t').value);
+
+    if(!isNaN(iP) && !isNaN(fP) && !isNaN(d) && !isNaN(sl) && !isNaN(t) && (sl>=3) && (sl<=5) && (d>=0) && (t>=0)) {
+
+    }
+    else{
+        //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one  
+        let calculationsSignalSpeedDiv = document.getElementById("calculationsSignalSpeed");        
+        calculationsSignalSpeedDiv.innerHTML = ""; 
+        let errorMessage = document.createElement("p");
+        errorMessage.style.color = "red";
+        errorMessage.textContent = "Please make sure you have inserted correct values!";
+        calculationsSignalSpeedDiv.appendChild(errorMessage);
+    }
+
+}
+
+
+
+function clearSignalSpeed(){
+    document.getElementById('initP').value = "";
+    document.getElementById('finalP').value = "";
+    document.getElementById('d').value = "";
+    document.getElementById('sl').value = "";
+    document.getElementById('t').value = "";
+    document.getElementById("calculationsSignalSpeed").innerHTML = "";
 }
