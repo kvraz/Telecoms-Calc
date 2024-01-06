@@ -81,6 +81,8 @@ function changeSEToSNRDiv(h, p1, p2, p3) {
     calculationsSEToSNRDiv.appendChild(par1);
     calculationsSEToSNRDiv.appendChild(par2);
     calculationsSEToSNRDiv.appendChild(par3);
+
+    calculationsSEToSNRDiv.style.backgroundColor = "#333";  
 }
 
 //Clear inputs
@@ -89,8 +91,9 @@ function clearSEToSNR(){
     document.getElementById('SE').value = "";
     document.getElementById('SNR').value = "";
 
-    //Clear the calculations div 
-    document.getElementById("calculationsSEToSNR").innerHTML = "";    
+    //Clear the calculations div  
+    document.getElementById("calculationsSEToSNR").innerHTML = ""; 
+    document.getElementById("calculationsSEToSNR").style.backgroundColor = "";     
 }
 
 /**********************************************************************************/
@@ -172,16 +175,16 @@ function convertPdBW(){
   
     if (!isNaN(dbw)){ //Checking if the user input is correct
         //Displaying the other unit results on their fields
-        document.getElementById("PW").value = w.toString();
-        document.getElementById("PmW").value = mw.toString();
-        document.getElementById("PdBm").value = dbm.toString();
+        document.getElementById("PW").value = w.toFixed(2).toString();
+        document.getElementById("PmW").value = mw.toFixed(2).toString();
+        document.getElementById("PdBm").value = dbm.toFixed(2).toString();
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Converting Power in DeciSEls Relative to One Watt"
-        var dbwDemo =  "PdBW = "+dbw+ " dBW"; 
-        var wDemo = "PdBW = 10 * log10(PW) => PW = 10 ^ (PdBW / 10) => PW = 10 ^ ("+dbw+" / 10) => PW = "+w+" watts";
-        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w+" =>PmW = "+mw+" milliwatts";              
-        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBm = "+dbw+" + 30 => PdBm = "+dbm+" dBm"; 
+        var header = "Converting Power in Decibels Relative to One Watt"
+        var dbwDemo =  "PdBW = "+dbw.toFixed(2)+ " dBW"; 
+        var wDemo = "PdBW = 10 * log10(PW) => PW = 10 ^ (PdBW / 10) => PW = 10 ^ ("+dbw.toFixed(2)+" / 10) => PW = "+w.toFixed(2)+" watts";
+        var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w.toFixed(2)+" =>PmW = "+mw.toFixed(2)+" milliwatts";              
+        var dbmDemo =  "PdBm = 10 * log10(PW) + 30 => PdBm = PdBW + 30 => PdBm = "+dbw.toFixed(2)+" + 30 => PdBm = "+dbm.toFixed(2)+" dBm"; 
 
         changePowerMeasDiv(header, dbwDemo, wDemo, mwDemo, dbmDemo);
     }
@@ -210,7 +213,7 @@ function convertPdBm(){
         document.getElementById("PdBW").value = dbw.toFixed(2).toString();
 
         //Auxilliary code to show the mathematical process of conversion
-        var header = "Converting Power in DeciSEls Relative to One Milliwatt"
+        var header = "Converting Power in Decibels Relative to One Milliwatt"
         var dbmDemo = "PdBm = "+dbm.toFixed(2)+ " dBm"
         var wDemo = "PdBm = 10 * log10(PW) + 30 => PW = 10 ^ [(PdBm - 30) / 10] => PW = 10 ^ [("+dbm.toFixed(2)+" - 30) / 10] => PW = "+w.toFixed(2)+" watts";       
         var mwDemo = "PmW = 1000 * PW => PmW = 1000 * "+w.toFixed(2)+" =>PmW = "+mw.toFixed(2)+" milliwatts";              
@@ -252,6 +255,8 @@ function changePowerMeasDiv(h, p1, p2, p3, p4){
     calculationsPowerConvDiv.appendChild(par2);
     calculationsPowerConvDiv.appendChild(par3);
     calculationsPowerConvDiv.appendChild(par4);
+
+    calculationsPowerConvDiv.style.backgroundColor = "#333";
 }
 
 //Clear inputs
@@ -263,7 +268,8 @@ function clearPowerConv(){
     document.getElementById("PdBm").value = "";
 
     //Clear the calculations div 
-    document.getElementById("calculationsPowerConv").innerHTML = "";  
+    document.getElementById("calculationsPowerConv").innerHTML = "";
+    document.getElementById("calculationsPowerConv").style.backgroundColor = ""; 
 }
 
 /**********************************************************************************/
@@ -299,6 +305,8 @@ function calculateSeLim(){
         calculationsSeLimDiv.appendChild(par2);
         calculationsSeLimDiv.appendChild(par3);
 
+        calculationsSeLimDiv.style.backgroundColor = "#333";
+
     }
     else{
         //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one 
@@ -314,6 +322,7 @@ function calculateSeLim(){
 function clearSeLim(){
     document.getElementById('EbN0').value = "";
     document.getElementById("calculationsSeLim").innerHTML = "";
+    document.getElementById("calculationsSeLim").style.backgroundColor = "";
 }
 
 /**********************************************************************************/
@@ -344,7 +353,9 @@ function calculateSignalSpeed(){
         calculationsSignalSpeedDiv.append(header);
         calculationsSignalSpeedDiv.append(parameters);
         calculationsSignalSpeedDiv.append(dDemo);
-        calculationsSignalSpeedDiv.append(sDemo);      
+        calculationsSignalSpeedDiv.append(sDemo);  
+        
+        calculationsSignalSpeedDiv.style.backgroundColor = "#333";
     }
     else{
         //If the user hasn't given a value for the EbN0 he is notified and prompted to give another one  
@@ -365,4 +376,5 @@ function clearSignalSpeed(){
     document.getElementById('sl').value = "";
     document.getElementById('t').value = "";
     document.getElementById("calculationsSignalSpeed").innerHTML = "";
+    document.getElementById("calculationsSignalSpeed").style.backgroundColor = "";
 }

@@ -8,7 +8,6 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <a href="labs.html" class="redirectButton">Back</a>
         <div id="formSignalSpeed" class = "forms"> <!--Input field to insert speed parameters-->
             <h1>Signal Speed Calculator</h1>
             <label for="initP">Initial Power:</label>
@@ -26,12 +25,12 @@
             <label for="t">Time:</label>
             <input type="text" placeholder="Time in s" id="t" name="t" required><br>         
 
-            <input type="submit" value="Calculate Speed" onclick="calculateSignalSpeed()">
+            <input class = "formButton" type="submit" value="Calculate Speed" onclick="calculateSignalSpeed()">
             
-            <input type="submit" value="Clear" onclick="clearSignalSpeed()">                           
+            <input class = "formButton" type="submit" value="Clear" onclick="clearSignalSpeed()">                           
         </div>
         <div id="calculationsSignalSpeed" class="calcs"></div> <!--This is were the mathematical process of conversions is shown-->
-
+        <button onclick="location.href='labs.html'" class="redirectButton">Back</button>
         <script src="scripts.js"></script>
     </body>
     

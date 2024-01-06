@@ -8,17 +8,16 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <a href="labs.html" class="redirectButton">Back</a>
         <div id="formSeLim" class = "forms"> <!--Input field to insert Eb/N0 value-->
             <h1>Spectral Efficiency Limit</h1>
             <h4>Calculte the upper limit of Spectral Efficiency (SE) with Eb/N0 (SNR per bit)</h4>
             <label for="EbN0">Eb/N0 in dB:</label>
             <input type="text" placeholder="Give an Eb/N0 value in dB" id="EbN0" name="EbN0">
-            <input type="submit" value="Calculate lim" onclick="calculateSeLim()"><br>
-            <input type="submit" value="Clear" onclick="clearSeLim()">      
+            <input class = "formButton" type="submit" value="Calculate lim" onclick="calculateSeLim()"><br>
+            <input class = "formButton" type="submit" value="Clear" onclick="clearSeLim()">      
         </div>
         <div id="calculationsSeLim" class="calcs"></div> <!--This is were the mathematical process of conversions is shown-->
-
+        <button onclick="location.href='labs.html'" class="redirectButton">Back</button>
         <script src="scripts.js"></script>
     </body>
     

@@ -8,32 +8,31 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <a href="labs.html" class="redirectButton">Back</a>
         <div id="formPowerConv" class = "forms"> <!--Input field to insert power measurement values values-->
             <h1>Power Measurement Converter</h1>
             <label for="PW">W:</label>
             <input type="text" placeholder="Give power in Watts" id="PW" name="PW">
-            <input type="submit" value="Convert PW" onclick="convertPW()">
+            <input class = "formButton" type="submit" value="Convert PW" onclick="convertPW()">
             <br/>
 
             <label for="PmW">mW:</label>
             <input type="text" placeholder="Give power in Milliwatts" id="PmW" name="PmW">
-            <input type="submit" value="Convert PmW" onclick="convertPmW()">
+            <input class = "formButton" type="submit" value="Convert PmW" onclick="convertPmW()">
             <br/>        
 
             <label for="PdbW">dBW:</label>
             <input type="text" placeholder="Give power in dB relative to 1 W" id="PdBW" name="PdBW">
-            <input type="submit" value="Convert PdBW" onclick="convertPdBW()">
+            <input class = "formButton" type="submit" value="Convert PdBW" onclick="convertPdBW()">
             <br/>
 
             <label for="PdBm">dBm:</label>
             <input type="text" placeholder="Give power in dB relative to 1 mW" id="PdBm" name="PdBm">
-            <input type="submit" value="Convert PdBm" onclick="convertPdBm()">
+            <input class = "formButton" type="submit" value="Convert PdBm" onclick="convertPdBm()">
             <br/>
-            <input type="submit" value="Clear" onclick="clearPowerConv()">                         
+            <input class = "formButton" type="submit" value="Clear" onclick="clearPowerConv()">                         
         </div>
         <div id="calculationsPowerConv" class="calcs"></div> <!--This is were the mathematical process of conversions is shown-->
-
+        <button onclick="location.href='labs.html'" class="redirectButton">Back</button>
         <script src="scripts.js"></script>
     </body>
     
