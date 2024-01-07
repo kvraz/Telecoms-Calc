@@ -15,7 +15,7 @@ function convertToSNR(){
         var header = "Process of Calculating SNR from SE"
         var SEDemo = "SE = "+SE.toFixed(2)+" bps/Hz";
         var snrDemo = "SE = log2(SNR + 1) => SNR = 2^SE - 1 => SNR = 2^"+SE.toFixed(2)+" - 1 => SNR = "+snr.toFixed(2);
-        var snrdbDemo = "SNRdb = 10 * log10SNR => SNRdB = 10 * log10("+snr.toFixed(2)+") => SNRdB = "+snr_db.toFixed(2)+" dB";
+        var snrdbDemo = "SNRdb = 10 * log10(SNR) => SNRdB = 10 * log10("+snr.toFixed(2)+") => SNRdB = "+snr_db.toFixed(2)+" dB";
         changeSEToSNRDiv(header, SEDemo, snrDemo, snrdbDemo);   
     }
     else{   //If the user hasn't given a value for the SE he is notified and prompted to give another one    
@@ -299,7 +299,7 @@ function calculateSeLim(){
         var par2 = document.createElement("p");
         par2.textContent = "SE <= log2(1 + EbN0 * SE) => SE <= log2(1 + "+EbN0.toFixed(2)+" * SE)";
         var par3 = document.createElement("p");
-        par3.textContent = "The largest SE value that meets this condition = "+SE.toFixed(2)+" bps/Hz";
+        par3.textContent = "The largest SE value that meets this condition  "+SE.toFixed(2)+" bps/Hz";
 
         calculationsSeLimDiv.appendChild(par1);
         calculationsSeLimDiv.appendChild(par2);
